@@ -1,0 +1,35 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: cloud-stream-publisher
+  cloud:
+    function:
+      definition: producer;enhancer;aggregator;join
+    stream:
+      kafka:
+        streams:
+          bindings:
+            enhancer-in-0:
+              consumer:
+                keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+                valueSerde: com.ameda.kevin.cloud_stream_publisher.dto.converters.MyEventSerDes
+#            enhancer-out-0:
+#              producer:
+#                configuration:
+#                  spring.json.add.type.headers: false
+
+        bindings:
+          producer-out-0:
+            producer:
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+
+      bindings:
+        producer-out-0:
+          destination: first-topic
+
+        enhancer-in-0:
+          destination: first-topic
+        enhancer-out-0:
+          destination: second-topic
