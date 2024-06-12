@@ -1,2 +1,5 @@
 # spring-cloud-stream
-in my take I am using the apache kafka
+#publisher
+#enhancer
+#aggregator
+- with kstreams 
